@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,6 +17,9 @@ public class MemberDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	//아이디 종복 검사
 	public boolean isMemberCheck(String m_id) {
@@ -41,7 +45,7 @@ public class MemberDao {
 		
 		List<String> args = new ArrayList<String>();
 		args.add(vo.getM_id());
-		args.add(vo.getM_pw());
+		args.add(passwordEncoder.encode(vo.getM_pw()));
 		args.add(vo.getM_name());
 		args.add(vo.getM_gender());
 		args.add(vo.getM_mail());

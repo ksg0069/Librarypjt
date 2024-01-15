@@ -27,10 +27,13 @@ public class MemberController {
 	@RequestMapping(value="/create", method = RequestMethod.POST)
 	public String createMember(MemberVo vo) {
 		LOGGER.info("[MemberController] createMember();");
+		String nextPage="member/create_success";
+		if(memberService.createMember(vo) <= 0) {
+			nextPage = "member/create_fail";
+		}
 		
-		memberService.createMember(vo);
 		
-		return "";
+		return nextPage;
 		
 	}
 	
