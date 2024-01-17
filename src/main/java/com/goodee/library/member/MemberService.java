@@ -27,6 +27,7 @@ public class MemberService {
 		return result;
 	}
 	
+	
 	public MemberVo loginMember(MemberVo vo) {
 		LOGGER.info("[MemberService] loginMember();");
 		MemberVo loginedMember = memberDao.selectMember(vo);
@@ -37,6 +38,17 @@ public class MemberService {
 	public List<MemberVo> listupMember(){
 		LOGGER.info("[MemberService] listupMember();");
 		return memberDao.selectMemberList();
+	}
+	
+	public int modifyMember(MemberVo vo) {
+		LOGGER.info("[MemberService] modifyMember();");
+		return memberDao.updateMember(vo);
+	}
+	
+	public MemberVo getLoginedMemberVo(int m_no) {
+		LOGGER.info("[MemberService] getLoginedMemberVo();");
+		return memberDao.getLoginedMemberVo(m_no);
+		
 	}
 
 }

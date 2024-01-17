@@ -30,7 +30,7 @@
 		 	<div class="menu">
 				<ul>
 					<li><a href="<c:url value='/member/logout'/>">로그아웃</a></li>
-					<li><a href="<c:url value='/member/login'/>">계정수정</a></li>
+					<li><a href="<c:url value='/member/${loginMember.m_no}'/>">계정수정</a></li>
 					<li><a href="<c:url value='/member'/>">회원목록</a></li>
 				</ul>
 			</div>
