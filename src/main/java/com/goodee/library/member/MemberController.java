@@ -150,21 +150,47 @@ public class MemberController {
 	public String modifyMemberConfirm(MemberVo vo, HttpSession session) {
 		LOGGER.info("[MemberCotroller] modifyMemberConfirm();");
 		//1. 회원 정보 수정(DB)
-		
+			
 		int result = memberService.modifyMember(vo);
+		
 		if(result >0 ) {
 			//2. 세션 정보 변경
 			MemberVo loginedMemberVo = new MemberVo();
 			loginedMemberVo = memberService.getLoginedMemberVo(vo.getM_no());
-			//3. 성공 화면 이동
 			session.setAttribute("loginMember", loginedMemberVo);
 			session.setMaxInactiveInterval(60*30);
+			
+			//3. 성공 화면 이동
+			return "member/modify_success";
 		}else {
 			//3. 실패 화면 이동
+			return "member/modify_fail";
 		}
-		
-		return "";
+
 	}
+	
+	//비밀번호 설정 화면 이동
+	@RequestMapping(value = "/findPassword", method = RequestMethod.GET)
+	public String findPasswordForm() {
+		LOGGER.info("[MemberCotroller] findPasswordForm();");
+
+		return "member/find_password_form";
+	}
+	
+	//비밀번호 설정 기능
+	@RequestMapping(value = "/findPassword", method = RequestMethod.POST)
+	public String findPasswordConfirm(MemberVo vo) {
+		LOGGER.info("[MemberCotroller] findPasswordConfirm();");
+		int result = memberService.findPasswordConfirm(vo);
+		if(result <= 0) {
+			return "member/find_password_fail";
+		}else {
+			
+			return "member/find_password_success";
+		}
+	}
+	
+	
 	
 
 }

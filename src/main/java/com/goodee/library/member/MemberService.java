@@ -47,8 +47,24 @@ public class MemberService {
 	
 	public MemberVo getLoginedMemberVo(int m_no) {
 		LOGGER.info("[MemberService] getLoginedMemberVo();");
-		return memberDao.getLoginedMemberVo(m_no);
 		
+		return memberDao.selectMemberOne(m_no);
+		
+	}
+	
+	public int findPasswordConfirm(MemberVo vo) {
+		LOGGER.info("[MemberService] findPasswordConfirm();");
+		//1. 입력한 정보와 일치하는 사용자가 있는지 확인
+		int result =0;
+		
+		MemberVo selectedMember = memberDao.selectMemberOne(vo);
+		if(selectedMember != null) {
+			//2. 새로운 비밀번호 생성
+			//3. 생성된 비밀번호 업데이트
+			//4. 메일 보내기
+		
+		}
+		return result;
 	}
 
 }

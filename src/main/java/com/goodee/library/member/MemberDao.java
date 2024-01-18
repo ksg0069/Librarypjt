@@ -85,10 +85,18 @@ public class MemberDao {
 			return result;
 		}
 		
-		//update시 session정보 업데이트를 위해 다시 회원 정보 가져오기
-		public MemberVo getLoginedMemberVo(int m_no) {
-			LOGGER.info("[MemberDao] getLoginedMemberVo();");
-			return sqlSession.selectOne(NAMESPACE+"getLoginedMemberVo",m_no);
+		//회원 단일 정보 데이터베이스에서 조회 - m_no기준으로 조회
+		public MemberVo selectMemberOne(int m_no) {
+			LOGGER.info("[MemberDao] selectMemberOne();");
+			return sqlSession.selectOne(NAMESPACE+"selectMemberOne",m_no);
+		}
+		
+		//아이디, 이름, 메일 기준 회원 조회
+		public MemberVo selectMemberOne(MemberVo vo) {
+			LOGGER.info("[MemberDao] selectMemberOne();");
+			
+			MemberVo memberVo = sqlSession.selectOne(NAMESPACE+"selectMemberForPassword",vo);
+			return memberVo;
 		}
 	
 	//아이디 종복 검사 - jdbcTemplate

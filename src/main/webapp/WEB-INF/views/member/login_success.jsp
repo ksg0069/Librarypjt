@@ -18,7 +18,7 @@
          </div>
          <div class="others">
             <li><a href="<c:url value='/member/logout'/>">로그아웃</a></li>
-            <a>회원정보수정</a>
+			<li><a href="<c:url value='/member/${loginMember.m_no}'/>">계정수정</a></li>
          </div>
       </div>
    </section>         
