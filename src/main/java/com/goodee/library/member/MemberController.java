@@ -124,7 +124,7 @@ public class MemberController {
 	
 	//회원정보 수정
 	@RequestMapping(value = "/{m_no}", method = RequestMethod.GET)
-	public String modifyMember(@PathVariable int m_no, HttpSession session) {
+	public String modifyMember(@PathVariable int m_no) {
 		LOGGER.info("[MemberCotroller] modifyMember();");
 		// 다른 사람의 정보 수정 0
 		//1. url에 있는 m_no 기준 select 
@@ -133,16 +133,16 @@ public class MemberController {
 		//내 정보만 수정 o
 		//1. 세션에 있는 m_no 기준
 		//2. 수정 화면
-		MemberVo loginedMemberVo = (MemberVo)session.getAttribute("loginMember");
-		String nextPage = "";
-		if(loginedMemberVo == null) {
-			//로그인 화면 이동
-			nextPage = "redirect:/member/login";
-		}else {
-			//수정 화면 이동
-			nextPage = "member/modify_form";
-		}
-		return nextPage;
+//		MemberVo loginedMemberVo = (MemberVo)session.getAttribute("loginMember");
+//		String nextPage = ""; 인터셉터 처리
+//		if(loginedMemberVo == null) {
+//			//로그인 화면 이동
+//			nextPage = "redirect:/member/login";
+//		}else {
+//			//수정 화면 이동
+//			nextPage = "member/modify_form";
+//		}
+		return "member/modify_form";
 	}
 	
 	//회원정보 수정 기능

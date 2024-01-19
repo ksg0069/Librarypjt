@@ -3,7 +3,9 @@ package com.goodee.library.member;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -97,6 +99,21 @@ public class MemberDao {
 			
 			MemberVo memberVo = sqlSession.selectOne(NAMESPACE+"selectMemberForPassword",vo);
 			return memberVo;
+		}
+		
+		public int updatePassword(String m_id,String newPassword) {
+			LOGGER.info("[MemberDao] updatePassword();");
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("m_id", m_id);
+			params.put("m_pw",passwordEncoder.encode(newPassword)); //비밀번호 암호화
+			int result = -1;
+		    try {
+		    	result = sqlSession.update(NAMESPACE+"updatePassword",params);
+				
+			} catch (Exception e) {
+				LOGGER.error(e.toString());
+			}
+		    return result;
 		}
 	
 	//아이디 종복 검사 - jdbcTemplate
