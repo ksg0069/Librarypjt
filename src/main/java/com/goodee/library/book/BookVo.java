@@ -1,5 +1,7 @@
 package com.goodee.library.book;
 
+import com.goodee.library.util.PagingVo;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class BookVo {
+public class BookVo extends PagingVo {
 	
 	private int b_no;
 	private String b_name;
