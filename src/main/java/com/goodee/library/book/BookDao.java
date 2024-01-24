@@ -43,4 +43,12 @@ public class BookDao {
 		
 		return sqlSession.selectOne(NAMESPACE+"selectBookOne",b_no);
 	}
+	
+	public int updateBook(BookVo vo) {
+		LOGGER.info("[BookDao] updateBook();");
+		
+		return sqlSession.update(NAMESPACE+"updateBook",vo);
+
+		
+	}
 }

@@ -77,11 +77,49 @@ public class BookController {
 		//1. 도서 하나 정보 조회
 		//2. 화면 전환 + 정보 전달
 		BookVo vo = bookService.bookDetail(b_no);
-		model.addAttribute("vo",vo);
-		return "";
+		model.addAttribute("bookVo",vo);
+		return "book/detail";
 		
 	}
+	
+	//도서 수정 이동
+	@RequestMapping(value = "modify/{b_no}", method = RequestMethod.GET)
+	public String ModifyBookForm(@PathVariable int b_no,Model model) {
+		LOGGER.info("[BookController ModifyBookForm();");
+		//1. 기존정보 조회
+		//2. 화면 전환
+		BookVo vo = bookService.bookDetail(b_no);
+		model.addAttribute("bookVo",vo);
 
+		return "book/modify";
+	}
+
+	//도서 수정 기능
+	@RequestMapping(value = "modify/{b_no}", method = RequestMethod.POST)
+	public String ModifyBookConfirm(BookVo vo, @RequestParam("file") MultipartFile file) {
+		LOGGER.info("[BookController ModifyBookConfirm();");
+
+		//1. 만약에 새로운 파일이 있다면 -> 파일 업로드
+		if(file.getOriginalFilename().equals("") == false) {
+			String savedFileName = uploadFileService.upload(file);
+			if(savedFileName != null) {
+				
+				vo.setB_thumbnail(savedFileName);
+			}
+			
+		}
+		//2. 도서 정보 수정
+		int result = bookService.modifyConfirm(vo);
+		
+		//3. 결과 화면 이동
+		
+		if(result <= 0) {
+			
+			return "book/modify_fail";
+		}else {
+			return "book/modify_success";
+		}
+	}
 	
 	
 	

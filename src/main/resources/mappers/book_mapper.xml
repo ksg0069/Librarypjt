@@ -4,8 +4,8 @@
   
   
   <insert id="insertBook" parameterType="com.goodee.library.book.BookVo">
-  	INSERT INTO tbl_book(b_thumbnail,b_name,b_author,b_publisher,b_publish_year,b_reg_date,b_mod_date)
-  	VALUES(#{b_thumbnail},#{b_name},#{b_author},#{b_publisher},#{b_publish_year},now(),now())
+  	INSERT INTO tbl_book(b_thumbnail,b_name,b_author,b_publisher,b_publish_year,b_reg_date)
+  	VALUES(#{b_thumbnail},#{b_name},#{b_author},#{b_publisher},#{b_publish_year},now())
    </insert>
    
    <select id="selectBookList" parameterType="com.goodee.library.book.BookVo" resultType="com.goodee.library.book.BookVo">
@@ -34,4 +34,15 @@
    	 	b_no = #{b_no}
    	 </where>
    </select>
+   
+   <update id="updateBook" parameterType="com.goodee.library.book.BookVo">
+   	UPDATE tbl_book
+   	SET b_name = #{b_name}, b_author= #{b_author}, b_publisher = #{b_publisher}, b_publish_year = #{b_publish_year}, b_mod_date = now()
+   	<if test="b_thumbnail != null and b_thumbnail.equals('') == false">
+   		,b_thumbnail = #{b_thumbnail}
+   	</if>
+   	<where>
+   		b_no = #{b_no}
+   	</where>
+   </update>
 </mapper>

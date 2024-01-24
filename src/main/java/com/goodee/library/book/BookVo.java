@@ -17,7 +17,7 @@ public class BookVo extends PagingVo {
 	private String b_publisher;
 	private String b_publish_year;
 	private String b_thumbnail;
-	private String n_reg_date;
+	private String b_reg_date;
 	private String b_mod_date;
 
 }
