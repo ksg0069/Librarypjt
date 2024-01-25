@@ -55,9 +55,58 @@
          
          <div class="buttons">
             <a class="modify_book_button" href="/book/modify/${bookVo.b_no}">도서 수정</a>
-            <a class="delete_book_button" href="">도서 삭제</a>         
+            <a class="delete_book_button" onclick="deleteBook('${bookVo.b_no}')">도서 삭제</a>         
          </div>
       </div>
    </section>
+   <script type="text/javascript">
+   	function deleteBook(bookNo){
+   		//1. 도서 삭제 유무 확인
+   		let result = confirm('해당 도서를 정말 삭제하시겠습니까?');
+   		//2. 도서 삭제 후 결과 arlert로 알려주기
+   		if(result){
+   			fetch('/book/'+bookNo,{
+   				method:'DELETE',
+   				headers:{
+   					'Content-Type':'application/json;charset=utf-8'
+   				}
+   				
+   			})
+   			.then(response => response.text())
+   			.then(data => {
+   				if(data === '400'){
+   					
+   					alert('삭제 성공');
+   					location.replace('/book');
+   				}else{
+   					alert('삭제 실패');
+   				}
+   				
+   			})
+   			.catch(error=>{
+   				console.log(error);
+   			});
+   		}
+   		
+   	}
+   </script>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </html>

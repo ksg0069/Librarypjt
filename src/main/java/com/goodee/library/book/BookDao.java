@@ -51,4 +51,12 @@ public class BookDao {
 
 		
 	}
+	
+	public int deleteBook(int b_no) {
+		LOGGER.info("[BookDao] deleteBook();");
+
+		int result= sqlSession.delete(NAMESPACE+"deleteBook", b_no);
+		return result;
+		
+	}
 }

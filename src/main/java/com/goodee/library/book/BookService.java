@@ -45,4 +45,12 @@ public class BookService {
 		return bookDao.updateBook(vo);
 
 	}
+	
+	public int deleteBook(int b_no) {
+		LOGGER.info("[BookService] deleteBook();");
+		
+		return bookDao.deleteBook(b_no);
+
+		
+	}
 }
