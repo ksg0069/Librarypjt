@@ -15,12 +15,12 @@ public class UploadFileService {
 		//1. 파일을 서버 저장
 		String fileOriName = file.getOriginalFilename();
 		String fileExtension = fileOriName.substring(fileOriName.lastIndexOf("."),fileOriName.length()); //확장자
-		String uploadDir = "C:\\library\\upload\\";
+		String uploadDir = "/var/lib/tomcat9/webapps/upload/";
 		
 		UUID uuid = UUID.randomUUID();
 		String uniqueName = uuid.toString().replaceAll("-", "");
 		
-		File saveFile = new File(uploadDir+"\\"+uniqueName+fileExtension);
+		File saveFile = new File(uploadDir+uniqueName+fileExtension);
 		
 		if(!saveFile.exists()) {
 			saveFile.mkdirs();
